@@ -44,6 +44,16 @@
         cursor: pointer;
       }
 
+	  @media only screen and (max-width: 600px) {
+	    #buttonContainer div {
+	      flex-direction: column;
+	      align-items: center;
+	    }
+	    #buttonContainer input {
+  	      margin: 5px 0;
+	    }
+	  }
+
       #buttonContainer div input:last-child {
         margin-right: 0;
       }
