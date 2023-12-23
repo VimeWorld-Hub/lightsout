@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title> LO Solver </title>
+    <title>LO Solver</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
@@ -128,7 +128,7 @@
       var playing;
       var autogen;
 
-      function customAlert(message, color) {
+      function customAlert(message, color, seconds) {
         var gameGridWidth = $("#gameGrid").width();
         var gameGridHeight = $("#gameGrid").height();
         var centerX = $("#gameGrid").offset().left + gameGridWidth / 2;
@@ -138,7 +138,7 @@
         }).fadeIn();
         setTimeout(function() {
           $("#modal").fadeOut();
-        }, 3000);
+        }, seconds * 1000);
       }
 
       function addEventToDivs() {
@@ -229,7 +229,7 @@
 
       function operate(col, row) {
         if (col >= colcount || row >= rowcount) return;
-        if (hasHighlightedSquare) return customAlert("Решение уже найдено!\nИспользуйте команду редактирования\nдля смены состояния ламп.", "#f2cc6d");
+        if (hasHighlightedSquare) return customAlert("Решение уже найдено!\nИспользуйте команду редактирования\nдля смены состояния ламп.", "#f2cc6d", 3);
         flip(col, row);
         if (playing) {
           if (col > 0) flip(col - 1, row);
@@ -361,7 +361,7 @@
         for (var goal = 0; goal < imgcount; goal++) {
           if (solveProblem(goal)) {
             $("#allowEditB").removeAttr("disabled");
-            customAlert("Решение найдено!\nТеперь в игре нажмите <b>один раз</b> в любом порядке\nна подсвеченные лампы.", "#f2cc6d");
+            customAlert("Решение найдено!\nТеперь в игре нажмите <b>один раз</b>\nв любом порядке на подсвеченные лампы.", "#f2cc6d", 5);
               var anscols = new Array();
               var j;
               for (j = 0; j < n; j++) anscols[cols[j]] = j;
@@ -379,7 +379,7 @@
           // (aborted or) no solution
           for (var col = 0; col < colcount; col++)
             for (var row = 0; row < rowcount; row++) setanscellimage(col, row, outrangeimg);
-          customAlert("Нет решений!", "#ff0000");
+          customAlert("Нет решений!", "#ff0000", 3);
         }
 
         function initMatrix() {
