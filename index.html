@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title> LO Solver </title>
+    <title>LO Solver</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
@@ -66,6 +66,10 @@
         color: #999;
         cursor: not-allowed;
       }
+      
+      input[type="radio"]:checked + label {
+        color: #ededed;
+      }
 
       #container {
         display: flex;
@@ -77,6 +81,45 @@
 
       #toolbar {
         margin-bottom: 20px;
+      }
+
+      input[type=radio] {
+        --s: 1em;
+        --c: #009688; /* the active color */
+        height: var(--s);
+        aspect-ratio: 1;
+        border: calc(var(--s)/8) solid #939393;
+        padding: calc(var(--s)/8);
+        background: 
+           radial-gradient(farthest-side,var(--c) 94%,#0000) 
+           50%/0 0 no-repeat content-box;
+        border-radius: 50%;
+        outline-offset: calc(var(--s)/10);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        font-size: inherit;
+        transition: .3s;
+      }
+
+      input[type=radio]:checked {
+        border-color: var(--c);
+        background-size: 100% 100%;
+      }
+
+	  label {
+		vertical-align: 0.2em;
+  		margin-left: 0.15em;
+	  }
+
+      @media print {
+        input[type=radio] {
+          -webkit-appearance: auto;
+          -moz-appearance: auto;
+          appearance: auto;
+          background: none;
+        }
       }
 
       .cell {
@@ -108,6 +151,18 @@
     </style>
     <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
     <script type="text/javascript">
+	window.addEventListener('load', function () {
+	  var savedTarget = getCookie("targetOn");
+	  console.log(getCookie("targetOn"));
+	  if (savedTarget !== null) {
+	    targetOn = savedTarget === "true";
+	    document.getElementById("radOn").checked = targetOn;
+	    document.getElementById("radOff").checked = !targetOn;
+	  } else {
+	  	setTarget(true);
+	  	$("#radOn").prop("checked", true);
+	  }
+	});
       var imgs = ["on.jpg", "off.jpg"];
       var nums = imgs.map((img, index) => "number" + index + ".gif");
       var maxcolcount = 5;
@@ -124,6 +179,33 @@
       var steps;
       var playing;
       var autogen;
+      var targetOn = true; 
+ 
+	  function setCookie(name, value, days) {
+	    var expires = "";
+	    if (days) {
+	      var date = new Date();
+	      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+	      expires = "; expires=" + date.toUTCString();
+	    }
+	    document.cookie = name + "=" + value + expires + "; path=/";
+	  }
+
+      function setTarget(value) {
+        targetOn = value;
+        setCookie("targetOn", value, 30);
+      }
+
+	  function getCookie(name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for (var i = 0; i < ca.length; i++) {
+	      var c = ca[i];
+	      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	    }
+	    return null;
+	  }
 
       function customAlert(message, color, seconds) {
         var gameGridWidth = $("#gameGrid").width();
@@ -215,38 +297,10 @@
         autogen = false;
       }
 
-      function play() {
-        playing = true;
-      }
-
-      function ansoperate(col, row) {
-        operate(col, row);
-        solve();
-      }
-
       function operate(col, row) {
         if (col >= colcount || row >= rowcount) return;
         if (hasHighlightedSquare) return customAlert("Решение уже найдено!\nИспользуйте команду редактирования\nдля смены состояния ламп.", "#c45467", 3);
         flip(col, row);
-        if (playing) {
-          if (col > 0) flip(col - 1, row);
-          if (row > 0) flip(col, row - 1);
-          if (col < colcount - 1) flip(col + 1, row);
-          if (row < rowcount - 1) flip(col, row + 1);
-          steps++;
-          if (autogen && isCleared()) {
-            var row;
-            var col;
-            for (row = 0; row < maxrowcount; row++) {
-              for (col = 0; col < maxcolcount; col++) {
-                try {
-                  $("#ansDiv_" + col + row).hide();
-                } catch (err) {}
-              }
-            }
-            autogen = false;
-          }
-        }
       }
       // --- operation methods ---
       function setcell(col, row, val) {
@@ -264,8 +318,8 @@
             $("#ansDiv_" + col + row).hide();
           } catch (err) {}
         } else if (imgsrc == "number1.gif") {
-          $("#ansDiv_" + col + row).fadeTo(0, 0.4).show();
-          hasHighlightedSquare = true; // Устанавливаем флаг, если есть подсвеченный квадратик
+          $("#ansDiv_" + col + row).fadeTo(0, 0.25).show();
+          hasHighlightedSquare = true;
         } else if (imgsrc == "number0.gif") {
           try {
             $("#ansDiv_" + col + row).hide();
@@ -404,8 +458,10 @@
           n = size;
           np = n + 1;
           initMatrix();
-          for (var col = 0; col < colcount; col++)
-            for (var row = 0; row < rowcount; row++) mat[row * colcount + col][n] = modulate(goal - cells[col][row]);
+          for (var col = 0; col < colcount; col++) {
+            for (var row = 0; row < rowcount; row++) {
+             mat[row * colcount + col][n] = modulate((targetOn ? 0 : 1) - cells[col][row]);
+            }}
           return sweep();
         }
 
@@ -471,7 +527,12 @@
           <input type="button" id="allowEditB" value="Редактировать" onClick="allowEdit()" disabled>
         </div>
       </div>
-      <div style="margin-top: 10px; margin-bottom: 10px;"></div>
+      <div style="margin-top: 10px; margin-bottom: 10px; font-size: 13px; color: #b3b5b4;">
+        <label>Все фонари должны быть</label>
+        <input id="radOn" type="radio" name="target" onclick="setTarget(true)"><label for="radOn">включены</label>
+        <input id="radOff" type="radio" name="target" onclick="setTarget(false)"><label for="radOff">выключены</label>
+        <p style="margin-top: 0.5em; margin-bottom: 0em;">(вкл. - Белый Холод, выкл. - карта "Завод")</p>
+      </div>
       <div id="gameGrid">
         <div>
           <div class="cell" id="div_00">
