@@ -412,7 +412,7 @@
         for (var goal = 0; goal < imgcount; goal++) {
           if (solveProblem(goal)) {
             $("#allowEditB").removeAttr("disabled");
-            customAlert("Решение найдено!\nТеперь в игре нажмите <b>один раз</b>\nв любом порядке на подсвеченные лампы.", "#f2cc6d", 5);
+            customAlert("Решение найдено!\nТеперь в игре нажмите <b>один раз</b> в любом порядке\nна все подсвеченные <b style='color: #6ea368; text-decoration: underline'>зелёным</b> лампы.", "#f2cc6d", 5);
               var anscols = new Array();
               var j;
               for (j = 0; j < n; j++) anscols[cols[j]] = j;
