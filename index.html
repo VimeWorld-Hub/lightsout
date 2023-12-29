@@ -151,7 +151,7 @@
     </style>
     <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
     <script type="text/javascript">
-	window.addEventListener('load', function () {
+	window.addEventListener("load", function () {
 	  var savedTarget = getCookie("targetOn");
 	  console.log(getCookie("targetOn"));
 	  if (savedTarget !== null) {
@@ -198,10 +198,10 @@
 
 	  function getCookie(name) {
 	    var nameEQ = name + "=";
-	    var ca = document.cookie.split(';');
+	    var ca = document.cookie.split(";");
 	    for (var i = 0; i < ca.length; i++) {
 	      var c = ca[i];
-	      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+	      while (c.charAt(0) == " ") c = c.substring(1, c.length);
 	      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
 	    }
 	    return null;
@@ -211,7 +211,7 @@
         var gameGridWidth = $("#gameGrid").width();
         var gameGridHeight = $("#gameGrid").height();
         var centerX = $("#gameGrid").offset().left + gameGridWidth / 2;
-        var centerY = $("#gameGrid").offset().top + gameGridHeight + 35 + (message.split('\n').length - 1) * 10;
+        var centerY = $("#gameGrid").offset().top + gameGridHeight + 35 + (message.split("\n").length - 1) * 10;
 	    if ($("#modal").is(":visible")) $("#modal").hide();
         $("#modal").html(message.replace(/\n/g, " <br> ")).css({
           left: centerX - $("#modal").outerWidth() / 2, top: centerY - $("#modal").outerHeight() / 2, color: color
@@ -228,13 +228,13 @@
           var match = id.match(/^div_(\d{2})$/);
           if (match) {
             var twoDigitNumber = match[1];
-            element.addEventListener('mousedown', function() {
+            element.addEventListener("mousedown", function() {
               operate(parseInt(twoDigitNumber.charAt(0)), parseInt(twoDigitNumber.charAt(1)));
             });
           }
         });
       }
-      window.addEventListener('load', addEventToDivs);
+      window.addEventListener("load", addEventToDivs);
       init();
 
       function init() {
@@ -309,7 +309,7 @@
       }
 
       function setcellimage(col, row, imgsrc) {
-        $("#img_" + col + row).attr('src', imgsrc);
+        $("#img_" + col + row).attr("src", imgsrc);
       }
 
       function setanscellimage(col, row, imgsrc) {
@@ -536,112 +536,112 @@
       <div id="gameGrid">
         <div>
           <div class="cell" id="div_00">
-            <img id='img_00' src='empty.gif'></img>
-            <div id='ansDiv_00' class='answer-cell'>&nbsp;</div>
+            <img id="img_00" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_00" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_01">
-            <img id='img_01' src='empty.gif'></img>
-            <div id='ansDiv_01' class='answer-cell'>&nbsp;</div>
+            <img id="img_01" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_01" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_02">
-            <img id='img_02' src='empty.gif'></img>
-            <div id='ansDiv_02' class='answer-cell'>&nbsp;</div>
+            <img id="img_02" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_02" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_03">
-            <img id='img_03' src='empty.gif'></img>
-            <div id='ansDiv_03' class='answer-cell'>&nbsp;</div>
+            <img id="img_03" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_03" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_04">
-            <img id='img_04' src='empty.gif'></img>
-            <div id='ansDiv_04' class='answer-cell'>&nbsp;</div>
+            <img id="img_04" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_04" class="answer-cell">&nbsp;</div>
           </div>
         </div>
         <div>
           <div class="cell" id="div_10">
-            <img id='img_10' src='empty.gif'></img>
-            <div id='ansDiv_10' class='answer-cell'>&nbsp;</div>
+            <img id="img_10" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_10" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_11">
-            <img id='img_11' src='empty.gif'></img>
-            <div id='ansDiv_11' class='answer-cell'>&nbsp;</div>
+            <img id="img_11" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_11" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_12">
-            <img id='img_12' src='empty.gif'></img>
-            <div id='ansDiv_12' class='answer-cell'>&nbsp;</div>
+            <img id="img_12" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_12" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_13">
-            <img id='img_13' src='empty.gif'></img>
-            <div id='ansDiv_13' class='answer-cell'>&nbsp;</div>
+            <img id="img_13" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_13" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_14">
-            <img id='img_14' src='empty.gif'></img>
-            <div id='ansDiv_14' class='answer-cell'>&nbsp;</div>
+            <img id="img_14" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_14" class="answer-cell">&nbsp;</div>
           </div>
         </div>
         <div>
           <div class="cell" id="div_20">
-            <img id='img_20' src='empty.gif'></img>
-            <div id='ansDiv_20' class='answer-cell'>&nbsp;</div>
+            <img id="img_20" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_20" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_21">
-            <img id='img_21' src='empty.gif'></img>
-            <div id='ansDiv_21' class='answer-cell'>&nbsp;</div>
+            <img id="img_21" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_21" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_22">
-            <img id='img_22' src='empty.gif'></img>
-            <div id='ansDiv_22' class='answer-cell'>&nbsp;</div>
+            <img id="img_22" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_22" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_23">
-            <img id='img_23' src='empty.gif'></img>
-            <div id='ansDiv_23' class='answer-cell'>&nbsp;</div>
+            <img id="img_23" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_23" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_24">
-            <img id='img_24' src='empty.gif'></img>
-            <div id='ansDiv_24' class='answer-cell'>&nbsp;</div>
+            <img id="img_24" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_24" class="answer-cell">&nbsp;</div>
           </div>
         </div>
         <div>
           <div class="cell" id="div_30">
-            <img id='img_30' src='empty.gif'></img>
-            <div id='ansDiv_30' class='answer-cell'>&nbsp;</div>
+            <img id="img_30" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_30" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_31">
-            <img id='img_31' src='empty.gif'></img>
-            <div id='ansDiv_31' class='answer-cell'>&nbsp;</div>
+            <img id="img_31" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_31" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_32">
-            <img id='img_32' src='empty.gif'></img>
-            <div id='ansDiv_32' class='answer-cell'>&nbsp;</div>
+            <img id="img_32" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_32" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_33">
-            <img id='img_33' src='empty.gif'></img>
-            <div id='ansDiv_33' class='answer-cell'>&nbsp;</div>
+            <img id="img_33" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_33" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_34">
-            <img id='img_34' src='empty.gif'></img>
-            <div id='ansDiv_34' class='answer-cell'>&nbsp;</div>
+            <img id="img_34" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_34" class="answer-cell">&nbsp;</div>
           </div>
         </div>
         <div>
           <div class="cell" id="div_40">
-            <img id='img_40' src='empty.gif'></img>
-            <div id='ansDiv_40' class='answer-cell'>&nbsp;</div>
+            <img id="img_40" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_40" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_41">
-            <img id='img_41' src='empty.gif'></img>
-            <div id='ansDiv_41' class='answer-cell'>&nbsp;</div>
+            <img id="img_41" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_41" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_42">
-            <img id='img_42' src='empty.gif'></img>
-            <div id='ansDiv_42' class='answer-cell'>&nbsp;</div>
+            <img id="img_42" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_42" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_43">
-            <img id='img_43' src='empty.gif'></img>
-            <div id='ansDiv_43' class='answer-cell'>&nbsp;</div>
+            <img id="img_43" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_43" class="answer-cell">&nbsp;</div>
           </div>
           <div class="cell" id="div_44">
-            <img id='img_44' src='empty.gif'></img>
-            <div id='ansDiv_44' class='answer-cell'>&nbsp;</div>
+            <img id="img_44" src="empty.gif" draggable="false"></img>
+            <div id="ansDiv_44" class="answer-cell">&nbsp;</div>
           </div>
         </div>
       </div>
